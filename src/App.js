@@ -1,14 +1,16 @@
 import React from 'react';
-import Card from './components/UI/Card';
 import UserForm from './components/Users/UsersForm';
 
 
 function App() {
-  return (
-    <Card>
-        <UserForm></UserForm>
-    </Card>
-  );
+    const saveUser = (user) => {
+    }
+
+    return (
+        <div className="app">
+            <UserForm onSaveUser={saveUser}></UserForm>
+        </div>
+    );
 }
 
 export default App;

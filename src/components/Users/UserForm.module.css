@@ -1,4 +1,19 @@
 .form {
     display: flex;
     flex-direction: column;
+    background-color: #ececec;
+    padding: 1.875rem;
+}
+
+fieldset {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0 0 1.25rem;
+    font-weight: bold;
+}
+
+.form__label {
+    margin-bottom: 0.625rem;
 }
