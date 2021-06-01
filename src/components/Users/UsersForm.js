@@ -9,16 +9,15 @@ const UserForm = (props) => {
     const [enteredName, setEnteredName] = useState('');
     const [enteredAge, setEnteredAge] = useState('');
 
-    console.log(props)
-
     const nameChangeHandler = (event) => setEnteredName(event.target.value);
+    const ageChangeHandler = (event) => setEnteredAge(event.target.value)
 
     const submitHandler = (event) => {
         event.preventDefault();
 
         const userData = {
             name: enteredName,
-            age: enteredAge
+            age: +enteredAge
         }
 
         props.onSaveUser(userData);
@@ -33,7 +32,7 @@ const UserForm = (props) => {
                 </fieldset>
                 <fieldset>
                     <label className={styles.form__label}>Age (Years)</label>
-                    <UserInput inputType={'number'}></UserInput>
+                    <UserInput inputType={'number'} onChange={ageChangeHandler}></UserInput>
                 </fieldset>
                 <Button buttonType={'submit'}>Add user</Button>
             </form>

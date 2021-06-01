@@ -1,8 +1,6 @@
 .form {
     display: flex;
     flex-direction: column;
-    background-color: #ececec;
-    padding: 1.875rem;
 }
 
 fieldset {
