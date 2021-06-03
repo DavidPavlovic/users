@@ -15,3 +15,7 @@ body {
     max-width: 880px;
     margin: 5rem auto 0;
 }
+
+p {
+    margin: 0;
+}

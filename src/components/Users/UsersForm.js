@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
 import UserInput from './UsersInput';
 import styles from './UserForm.module.css';
+import formStyles from '../UI/Card.module.css';
 import Card from '../UI/Card';
 import Button from '../UI/Button';
+import Modal from '../Modal/Modal';
 
 
 const UserForm = (props) => {
@@ -15,6 +17,11 @@ const UserForm = (props) => {
     const submitHandler = (event) => {
         event.preventDefault();
 
+        if(!enteredName || !enteredAge) {
+            console.log('nee')
+            return;
+        }
+
         const userData = {
             name: enteredName,
             age: +enteredAge
@@ -24,7 +31,8 @@ const UserForm = (props) => {
     };
 
     return(
-       <Card>
+       <Card className={formStyles.card__form}>
+           <Modal></Modal>
             <form className={styles.form} onSubmit={submitHandler}>
                 <fieldset>
                     <label className={styles.form__label}>Username</label>

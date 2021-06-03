@@ -1,9 +1,11 @@
 import UsersListItem from './UsersListItem';
+import styles from './UserList.module.css';
+
 
 const UserList = (props) => {
 
      return (
-        <ul>
+        <ul className={styles.list}>
             {
                 props.items.map(item => (
                     <UsersListItem

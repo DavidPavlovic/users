@@ -15,7 +15,6 @@ function App() {
             updateUsers.push({ name: userName.name, age: userName.age, id: Math.random().toString() });
             return updateUsers;
         })
-
     }
 
     let content = '';
