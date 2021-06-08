@@ -1,19 +1,28 @@
+import React, {useState} from 'react';
 import styles from './Modal.module.css';
+import Button from '../UI/Button';
 
-const Modal = () => {
+const Modal = (props) => {
+
+    const showHide = {
+        state: props.display
+    }
+
+    const closeModal = () => {
+        props.onCloseModal('none');
+    };
+
     return(
-    <div className={styles.modal}>
+    <div id="modal" className={styles.modal} style={{display: showHide.state}}>
         <div className={styles.modal__content}>
             <div className={styles.modal__header}>
-                <span className={styles.close}>&times;</span>
-                <h2>Modal Header</h2>
+                <h2>Invalid input</h2>
             </div>
             <div className={styles.modal__body}>
-                <p>Some text in the Modal Body</p>
-                <p>Some other text...</p>
+                <p>{props.children}</p>
             </div>
             <div className={styles.modal__footer}>
-                <h3>Modal Footer</h3>
+                <Button click={closeModal}>Close</Button>
             </div>
         </div>
     </div>

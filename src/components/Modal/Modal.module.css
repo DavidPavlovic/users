@@ -47,13 +47,12 @@
 }
   
 .modal__body {
-    padding: 2px 16px;
+    padding: 20px 16px;
 }
 
 .modal__footer {
-    padding: 2px 16px;
-    background-color: #27296d;
-    color: #fff;
+    padding: 2px 16px 10px;
+    text-align: right;
 }
 
 @-webkit-keyframes animatetop {
