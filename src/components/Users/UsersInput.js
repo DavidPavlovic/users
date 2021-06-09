@@ -1,9 +1,8 @@
 import styles from './UserInput.module.css';
 
 const UserInput = (props) => {
-
     return(
-        <input className={styles.input} type={props.inputType} onChange={props.onChange}></input>
+        <input className={styles.input} value={props.value} type={props.inputType} onChange={props.onChange}></input>
     )
 }
 

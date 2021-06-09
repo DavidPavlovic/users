@@ -11,7 +11,7 @@ const UserForm = (props) => {
     const [enteredName, setEnteredName] = useState('');
     const [enteredAge, setEnteredAge] = useState('');
     const [isValid, setIsValid] = useState(false);
-    const [modalText, setModalText] = useState('');
+    const [modalEle, setModalText] = useState();
     const modal = document.querySelector('#modal');
 
     const nameChangeHandler = (event) => setEnteredName(event.target.value);
@@ -20,12 +20,21 @@ const UserForm = (props) => {
     const submitHandler = (event) => {
         event.preventDefault();
 
-        if(!enteredName || enteredAge <= 0) {
-            if (!enteredName) {
-                setModalText('Please enter a valid name and age(non-empty values).');
-            }else if(enteredAge < 0) {
-                setModalText('Please enter a valid age (> 0)');
-            }
+        if(enteredName.trim().length === 0 || enteredAge.trim().length === 0) {
+            setModalText({
+                title: 'Invalid input',
+                message: 'Please enter a valid name and age(non-empty values).'
+            });
+
+            setIsValid(true);
+            return;
+        }
+
+        if(+enteredAge < 1) {
+            setModalText({
+                title: 'Invalid age',
+                message: 'Please enter a valid age (> 0).'
+            });
             setIsValid(true);
             return;
         }
@@ -36,6 +45,9 @@ const UserForm = (props) => {
         }
 
         props.onSaveUser(userData);
+
+        setEnteredName('');
+        setEnteredAge('');
     };
 
     const changeIsValid = () => {
@@ -43,22 +55,22 @@ const UserForm = (props) => {
     }
 
     window.onclick = function(event) {
-        if (event.target == modal) {
+        if (event.target === modal) {
             setIsValid(false);
         }
     }
 
     return(
        <Card className={formStyles.card__form}>
-           <Modal display={`${isValid ? 'block': 'none'}`} onCloseModal={changeIsValid}>{modalText}</Modal>
+           <Modal display={`${isValid ? 'block': 'none'}`} onCloseModal={changeIsValid} title={modalEle && modalEle.title } message={modalEle && modalEle.message}></Modal>
             <form className={styles.form} onSubmit={submitHandler}>
                 <fieldset>
                     <label className={styles.form__label}>Username</label>
-                    <UserInput inputType={'text'} inputPlaceholder={'name'} onChange={nameChangeHandler}></UserInput>
+                    <UserInput inputType={'text'} value={enteredName} inputPlaceholder={'name'} onChange={nameChangeHandler}></UserInput>
                 </fieldset>
                 <fieldset>
                     <label className={styles.form__label}>Age (Years)</label>
-                    <UserInput inputType={'number'} onChange={ageChangeHandler}></UserInput>
+                    <UserInput inputType={'number'} value={enteredAge} onChange={ageChangeHandler}></UserInput>
                 </fieldset>
                 <Button buttonType={'submit'}>Add user</Button>
             </form>
