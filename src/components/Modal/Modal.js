@@ -1,3 +1,5 @@
+import React from 'react';
+
 import styles from './Modal.module.css';
 import Button from '../UI/Button';
 import Card from '../UI/Card';
@@ -13,7 +15,7 @@ const Modal = (props) => {
     };
 
     return(
-        <div>
+        <React.Fragment>
             <div className={styles.backdrop} onClick={props.onCloseModal}></div>
             <Card id="modal" className={styles.modal} style={{display: showHide.state}}>
                 <div className={styles.modal__content}>
@@ -28,7 +30,7 @@ const Modal = (props) => {
                     </div>
                 </div>
             </Card>
-        </div>
+        </React.Fragment>
     )
 };
 

@@ -54,7 +54,7 @@ const UserForm = (props) => {
     }
 
     return(
-        <div>
+        <React.Fragment>
             {isValid && 
                 <Modal onCloseModal={changeIsValid} onCloseModal={changeIsValid} title={modalEle && modalEle.title } message={modalEle && modalEle.message}></Modal>
             }
@@ -72,7 +72,7 @@ const UserForm = (props) => {
                     <Button buttonType={'submit'}>Add user</Button>
                 </form>
             </Card>
-        </div>
+        </React.Fragment>
     )
 }
 
