@@ -51,12 +51,13 @@ const UserForm = (props) => {
 
     const changeIsValid = () => {
         setIsValid(false);
+        console.log('test')
     }
 
     return(
         <React.Fragment>
             {isValid && 
-                <Modal onCloseModal={changeIsValid} onCloseModal={changeIsValid} title={modalEle && modalEle.title } message={modalEle && modalEle.message}></Modal>
+                <Modal changeIsValid={changeIsValid} onCloseModal={changeIsValid} title={modalEle && modalEle.title } message={modalEle && modalEle.message}></Modal>
             }
 
             <Card className={formStyles.card__form}>
