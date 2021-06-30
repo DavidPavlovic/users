@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import UserInput from './UsersInput';
 import styles from './UserForm.module.css';
 import formStyles from '../UI/Card.module.css';
@@ -8,18 +8,21 @@ import Modal from '../Modal/Modal';
 
 
 const UserForm = (props) => {
-    const [enteredName, setEnteredName] = useState('');
+
+    // Ref should be use only for reading data
+    const nameInputRef = useRef();
+
     const [enteredAge, setEnteredAge] = useState('');
     const [isValid, setIsValid] = useState(false);
     const [modalEle, setModalText] = useState();
 
-    const nameChangeHandler = (event) => setEnteredName(event.target.value);
     const ageChangeHandler = (event) => setEnteredAge(event.target.value)
 
     const submitHandler = (event) => {
         event.preventDefault();
+        const enteredUserName = nameInputRef.current.value;
 
-        if(enteredName.trim().length === 0 || enteredAge.trim().length === 0) {
+        if(enteredUserName.trim().length === 0 || enteredUserName.trim().length === 0) {
             setModalText({
                 title: 'Invalid input',
                 message: 'Please enter a valid name and age(non-empty values).'
@@ -39,13 +42,14 @@ const UserForm = (props) => {
         }
 
         const userData = {
-            name: enteredName,
+            name: enteredUserName,
             age: +enteredAge
         }
 
         props.onSaveUser(userData);
 
-        setEnteredName('');
+        // Do not manipulate DOM, only let React manipulate ( in this case, it's ok because we are only reseting value)
+        nameInputRef.current.value = '';
         setEnteredAge('');
     };
 
@@ -64,11 +68,11 @@ const UserForm = (props) => {
                 <form className={styles.form} onSubmit={submitHandler}>
                     <fieldset>
                         <label className={styles.form__label}>Username</label>
-                        <UserInput inputType={'text'} value={enteredName} inputPlaceholder={'name'} onChange={nameChangeHandler}></UserInput>
+                        <input type='text' placeholder='name' ref={nameInputRef}></input>
                     </fieldset>
                     <fieldset>
                         <label className={styles.form__label}>Age (Years)</label>
-                        <UserInput inputType={'number'} value={enteredAge} onChange={ageChangeHandler}></UserInput>
+                        <UserInput inputType={'number'} value={enteredAge} onChange={ageChangeHandler} ></UserInput>
                     </fieldset>
                     <Button buttonType={'submit'}>Add user</Button>
                 </form>
